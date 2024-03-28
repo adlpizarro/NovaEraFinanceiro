@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>Incipiens</Authors>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <Platforms>AnyCPU;x86</Platforms>
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="botoes\**" />
+    <Compile Remove="Conversores\**" />
+    <Compile Remove="CreditoImagens\**" />
+    <Compile Remove="UserControls\**" />
+    <Compile Remove="Windows\**" />
+    <EmbeddedResource Remove="botoes\**" />
+    <EmbeddedResource Remove="Conversores\**" />
+    <EmbeddedResource Remove="CreditoImagens\**" />
+    <EmbeddedResource Remove="UserControls\**" />
+    <EmbeddedResource Remove="Windows\**" />
+    <None Remove="botoes\**" />
+    <None Remove="Conversores\**" />
+    <None Remove="CreditoImagens\**" />
+    <None Remove="UserControls\**" />
+    <None Remove="Windows\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\PessoaV1.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Incipiens.Modulos.Endereco.Database" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Incipiens.Modulos.Pessoa.Object\Incipiens.Modulos.Pessoa.Object.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\PessoaV1.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

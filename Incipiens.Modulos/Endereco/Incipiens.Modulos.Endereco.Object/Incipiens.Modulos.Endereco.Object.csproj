@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Authors>Incipiens</Authors>
+    <UserSecretsId>70a782d1-a096-476d-aa76-d3e8a6eab767</UserSecretsId>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Incipiens.Base.Model" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>

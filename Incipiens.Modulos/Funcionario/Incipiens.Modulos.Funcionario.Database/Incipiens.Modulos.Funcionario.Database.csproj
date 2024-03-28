@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <ItemGroup>
+     <PackageReference Include="Incipiens.Modulos.Pessoa.Database" Version="2.0.0" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\Incipiens.Modulos.Funcionario.Object\Incipiens.Modulos.Funcionario.Object.csproj" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <Compile Update="Properties\Resources.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Resources.resx</DependentUpon>
+     </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Update="Properties\Resources.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+     </EmbeddedResource>
+   </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>ee13499e-d413-4e90-8319-ceb6b945e907</UserSecretsId>
+    <Authors>Incipiens</Authors>
+    <Version>2.0.0</Version>    
+    <Platforms>AnyCPU;x86;x64</Platforms>    
+    <AssemblyVersion>2.0.0</AssemblyVersion>    
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+</Project>

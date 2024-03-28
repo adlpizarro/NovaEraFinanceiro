@@ -1,0 +1,26 @@
+﻿<Window x:Class="Incipiens.Modulos.Pessoa.Wpf.Windows.winContatoDetalhes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.Windows"
+        xmlns:menu="clr-namespace:Incipiens.Base.Wpf.Temas.Menus;assembly=Incipiens.Base.Wpf.Temas"
+        xmlns:userControl="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.UserControls"
+        mc:Ignorable="d"
+        Title="Detalhes de Contato" Height="650" Width="800" Style="{StaticResource winCadastro}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <userControl:uscContatoDetalhe Grid.Row="1" DataContext="{Binding }"/>
+        <menu:menuConfirmar x:Name="menuConfirmar" Grid.Row="0" />
+    </Grid>
+</Window>

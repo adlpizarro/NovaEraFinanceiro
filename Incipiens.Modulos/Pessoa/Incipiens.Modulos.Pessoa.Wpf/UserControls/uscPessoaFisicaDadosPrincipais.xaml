@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="Incipiens.Modulos.Pessoa.Wpf.UserControls.uscPessoaFisicaDadosPrincipais"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.UserControls"
+             mc:Ignorable="d" 
+             xmlns:custom="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Controles;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+             xmlns:s="clr-namespace:System;assembly=System.Runtime"
+             xmlns:conversores="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Conversoes;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+             xmlns:botoes="clr-namespace:Incipiens.Base.Wpf.Temas.Botoes;assembly=Incipiens.Base.Wpf.Temas"
+             xmlns:endereco="clr-namespace:Incipiens.Modulos.Endereco.Wpf.UsersControls;assembly=Incipiens.Modulos.Endereco.Wpf"
+             xmlns:validationRules="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.ValidationRules;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=System.Runtime"
+            d:DesignHeight="450" d:DesignWidth="700" Loaded="UserControl_Loaded" DataContextChanged="UserControl_DataContextChanged">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <validationRules:StringToDateTimeValidation x:Key="valData"/>
+            <conversores:ConverterEmptyDateToNull x:Key="conStringToDate"/>
+            <conversores:ConverterEmptyStringToFalse x:Key="conEmptyStringToFalse"/>
+            <conversores:ConverterEmptyStringToNull x:Key="conEmptyStringToNull"/>
+            <conversores:ConverterNullToFalse x:Key="conNullToFalse"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="210"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Style="{StaticResource stpComum}">
+            <Label x:Name="lblCpf">CPF</Label>
+            <custom:IncipiensMaskedTextBox
+                x:Name="mskCpf"
+                Mask="999,999,999-99"
+                IncludeLiteralsInValue="False"
+                IncludePromptInValue="False"
+                Value="{Binding Path=_Cpf, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False, Converter={StaticResource conEmptyStringToNull}}"
+                ValueDataType="{x:Type s:String}"
+                Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                TextChanged="mskCpf_TextChanged"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource stpComum}">
+            <Label x:Name="lblRg">Rg</Label>
+            <custom:TextBoxAutoSelectedAll x:Name="txtRg"
+                     Text="{Binding Path=_Rg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="0" Style="{StaticResource stpComum}">
+            <Label x:Name="lblDataNascimento">Nascimento</Label>
+            <custom:IncipiensMaskedTextBox
+                x:Name="mskDataNascimento"
+                Mask="99/99/9999"
+                IncludeLiteralsInValue="True"
+                IncludePromptInValue="True"
+                ValueDataType="{x:Type s:String}"
+                Validation.ErrorTemplate="{StaticResource errorTemplate}">
+                <custom:IncipiensMaskedTextBox.Value>
+                    <Binding 
+                        Path="_DataNascimento"
+                        Mode="TwoWay"
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnDataErrors="True"
+                        Converter="{StaticResource conStringToDate}"
+                        ConverterCulture="{x:Static glob:CultureInfo.CurrentCulture}">
+                        <Binding.ValidationRules>
+                            <validationRules:StringToDateTimeValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </custom:IncipiensMaskedTextBox.Value>
+            </custom:IncipiensMaskedTextBox>
+
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="0" Style="{StaticResource stpComum}">
+            <Label x:Name="lblIdade">Idade</Label>
+            <custom:TextBoxAutoSelectedAll x:Name="txtIdade"
+                     Text="{Binding Path=_Idade, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                    IsReadOnly="True"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource stpComum}">
+            <Label x:Name="lblNome">Nome</Label>
+            <custom:SugestTextBox x:Name="txtNome"
+                     Text="{Binding Path=_Nome, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource stpComum}">
+            <Label x:Name="lblApelido">Apelido</Label>
+            <custom:SugestTextBox x:Name="txtApelido"
+                     Text="{Binding Path=_Apelido, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Validation.ErrorTemplate="{StaticResource errorTemplate}"/>
+        </StackPanel>
+        <endereco:uscCadastroEndereco x:Name="uscEndereco" Grid.Row="2" Grid.ColumnSpan="4" DataContext="{Binding Path=_Endereco, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Validation.ErrorTemplate="{x:Null}"/>
+        <StackPanel Grid.Column="0" Grid.Row="3" Style="{StaticResource stpComum}">
+            <Label x:Name="lblIncricaoEstadual">Inscrição Estadual</Label>
+            <custom:IncipiensMaskedTextBox
+                x:Name="mskInscricaoEstadual"
+                IncludeLiteralsInValue="False"
+                Mask="{Binding Path=getMascaraIe, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                IncludePromptInValue="False"
+                Value="{Binding Path=_InscricaoEstadual, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=False}"
+                ValueDataType="{x:Type s:String}"
+                Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                IsEnabled="{Binding Path=getMascaraIe, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource conEmptyStringToFalse}}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

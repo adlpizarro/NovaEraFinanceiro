@@ -1,0 +1,29 @@
+﻿<Window x:Class="Incipiens.Modulos.Funcionario.Wpf.Windows.winCadastroFuncionario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Incipiens.Modulos.Funcionario.Wpf.Windows"
+        xmlns:menu="clr-namespace:Incipiens.Base.Wpf.Temas.Menus;assembly=Incipiens.Base.Wpf.Temas" 
+        xmlns:usControl="clr-namespace:Incipiens.Modulos.Funcionario.Wpf.UserControls"
+        mc:Ignorable="d"
+        Title="Cadastro de Funcionario" Height="580" Width="1050"
+        Style="{StaticResource winCadastro}" PreviewKeyDown="Window_PreviewKeyDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <menu:menuSalvar x:Name="menuSalvar" Grid.Row ="0"/>
+            <usControl:uscFuncionario x:Name="uscFuncionario" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Window>

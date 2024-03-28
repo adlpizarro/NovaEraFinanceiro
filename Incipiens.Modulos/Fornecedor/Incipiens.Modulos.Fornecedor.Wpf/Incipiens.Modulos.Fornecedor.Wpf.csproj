@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Version>2.0.0</Version>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\fornecedor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Incipiens.Modulos.Pessoa.Wpf" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Incipiens.Modulos.Fornecedor.Database\Incipiens.Modulos.Fornecedor.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\fornecedor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

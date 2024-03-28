@@ -1,0 +1,41 @@
+﻿<Window x:Class="Incipiens.Modulos.Pessoa.Wpf.Windows.winSelecionaTipoPessoa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.Windows"
+        mc:Ignorable="d"
+        xmlns:menu="clr-namespace:Incipiens.Base.Wpf.Temas.Menus;assembly=Incipiens.Base.Wpf.Temas"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
+        xmlns:pessoa="clr-namespace:Incipiens.Modulos.Pessoa.Object.enumerador;assembly=Incipiens.Modulos.Pessoa.Object"
+        Title="Selecione o Tipo da Pessoa" Height="180" Width="300"
+        Style="{StaticResource winCadastro}"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ObjectDataProvider x:Key="enTipoPessoa" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="pessoa:enumTipoPessoa"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <menu:menuConfirmar x:Name="menuConfirmar" Grid.Row="0"/>
+        <StackPanel Grid.Column="0" Grid.Row="1" Style="{StaticResource stpComum}">
+            <Label x:Name="lblTipoPessoa">Tipo Pessoa</Label>
+            <ComboBox  x:Name="cbxTipoPessoa"                        
+                       IsTextSearchEnabled="True"
+                       ItemsSource="{Binding Source={StaticResource enTipoPessoa}}"/>
+        </StackPanel>
+    </Grid>
+</Window>

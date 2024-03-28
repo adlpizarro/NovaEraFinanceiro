@@ -1,0 +1,87 @@
+﻿<Window x:Class="Incipiens.Modulos.Pessoa.Wpf.Windows.winConsultaPessoa"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.Windows"
+        mc:Ignorable="d"
+        xmlns:menu="clr-namespace:Incipiens.Base.Wpf.Temas.Menus;assembly=Incipiens.Base.Wpf.Temas"
+        Title="Consulta de Pessoas" Height="500" Width="1100"
+        Style="{StaticResource winConsulta}"
+        xmlns:custom="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Controles;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:s="clr-namespace:System;assembly=System.Runtime"
+        xmlns:con="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.Conversores"
+        xmlns:con2="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Conversoes;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <con:CpfCnpjConversor x:Key="CpfCnpjConversor"/>
+            <con2:ConverterEmptyStringToZero x:Key="EmptyStringToZero"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <menu:menuConfirmarNovo x:Name="menuConfirmarNovo" Grid.Row="0"/>
+        <xctk:BusyIndicator x:Name="busyAtualizar" Grid.Row="1">
+            <DockPanel Style="{StaticResource DockPanelSelecionaGrid}">
+                <CheckBox Style="{StaticResource chkSelecionados}" VerticalAlignment="Top" Margin="0,0,5,0" Grid.Column="2" HorizontalAlignment="Right" DockPanel.Dock="Bottom" Content="Mostrar Selecionados" x:Name="chkMostrarInseridos"/>
+                <DataGrid  x:Name="dgConsultaPessoa"  Style="{StaticResource dgConsulta}"/>
+            </DockPanel>
+        </xctk:BusyIndicator>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Style="{StaticResource stpComum}">
+                <Label x:Name="lblIdPessoa">Id Pessoa</Label>
+                <custom:TextBoxAutoSelectedAll x:Name="txtIdPessoa"
+                 TextChanged="TxtIdPessoa_TextChanged" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0" Style="{StaticResource stpComum}">
+                <Label x:Name="lblCpf">CPF</Label>
+                <xctk:MaskedTextBox x:Name="mskCpf"
+                                Mask="999,999,999-99"
+                                IncludeLiteralsInValue="False"
+                                IncludePromptInValue="False"
+                                ValueDataType="{x:Type s:String}"
+                                Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                                    TextChanged="TxtOutrasPesquisas_TextChanged"/>
+
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="0" Style="{StaticResource stpComum}">
+                <Label x:Name="lblCnpj">CNPJ</Label>
+                <xctk:MaskedTextBox x:Name="mskCnpj"
+                                Mask="99,999,999/9999-99"
+                                IncludeLiteralsInValue="False"
+                                IncludePromptInValue="False"
+                                Value="{Binding Path=_Cpf_Cnpj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                ValueDataType="{x:Type s:String}"
+                                Validation.ErrorTemplate="{StaticResource errorTemplate}" TextChanged="TxtOutrasPesquisas_TextChanged"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="0" Style="{StaticResource stpComum}">
+                <Label x:Name="lblNomeRazaoSocial_ApelidoNomeFantasia">Nome / Apelido / Razão Social / Nome Fantasia</Label>
+
+                <custom:TextBoxAutoSelectedAll x:Name="txtNomeRazaoSocial_ApelidoNomeFantasia" TextChanged="TxtOutrasPesquisas_TextChanged"/>
+            </StackPanel>
+
+        </Grid>
+        <menu:menuInferior Grid.Row="5" x:Name="menuInferior" Grid.ColumnSpan="6"/>
+    </Grid>
+</Window>

@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Incipiens.Modulos.Pessoa.Wpf.UserControls.uscCelularDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.UserControls"
+             xmlns:menus="clr-namespace:Incipiens.Base.Wpf.Temas.Menus;assembly=Incipiens.Base.Wpf.Temas"
+             xmlns:con="clr-namespace:Incipiens.Modulos.Pessoa.Wpf.Conversores"
+             xmlns:Outros="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Outros;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+             xmlns:custom="clr-namespace:Incipiens.Base.Wpf.CustomControlLibrary.Controles;assembly=Incipiens.Base.Wpf.CustomControlLibrary"
+             xmlns:btns="clr-namespace:Incipiens.Base.Wpf.Temas.Botoes;assembly=Incipiens.Base.Wpf.Temas"
+             xmlns:s="clr-namespace:System;assembly=System.Runtime"
+              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" PreviewKeyDown="UserControl_PreviewKeyDown">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Incipiens.Base.Wpf.Temas;component/dicRecursos.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <con:CelularConversor x:Key="celularConversor"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Style="{StaticResource rowDefLabel}"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <DataTemplate x:Key="templateCelular">
+                <TextBlock Text="{Binding Path=_NumeroCelular, Converter={StaticResource celularConversor}, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False, ValidatesOnDataErrors=True}"
+                Validation.ErrorTemplate="{StaticResource errorTemplateGrid}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="templateCelularEdit" >
+                <StackPanel>
+                    <custom:IncipiensMaskedTextBox x:Name="mskCelular"
+                                Mask="(99)99999-9999"
+                                IncludeLiteralsInValue="False"
+                                IncludePromptInValue="False"
+                                Value="{Binding Path=_NumeroCelular, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False, ValidatesOnDataErrors=False}"
+                                ValueDataType="{x:Type s:String}"
+                                Validation.ErrorTemplate="{StaticResource errorTemplateGrid}"/>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        <DataGrid x:Name="dgCelulares" 
+                  ItemsSource="{Binding }" 
+                  Style="{StaticResource dgEditable}"
+                  Grid.Column="0"
+                  Grid.Row="0">
+            <DataGrid.RowValidationRules>
+                <Outros:ValidationRules ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Celular" 
+                                        CellEditingTemplate="{StaticResource templateCelularEdit}"
+                                        CellTemplate="{StaticResource templateCelular}"
+                                        Width="0.25*"/>
+                <DataGridTextColumn Header="Observações" Binding="{Binding Path=_Observacoes, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Width="0.5*">
+                    <DataGridTextColumn.EditingElementStyle>
+                        <Style TargetType="TextBox">
+                            <Setter Property="CharacterCasing" Value="Upper"/>
+                        </Style>
+                    </DataGridTextColumn.EditingElementStyle>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Whatsapp" Binding="{Binding Path=_WhatsApp, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Width="0.1*"/>
+                <DataGridCheckBoxColumn Header="Env. Doc." Binding="{Binding Path=_EnviarDocs, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Width="0.16*"/>
+                <DataGridCheckBoxColumn Header="Env. Cobranças" Binding="{Binding Path=_EnviarCobrancas, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Width="0.15*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <menus:menuRemoverIncluir x:Name="menuRemoverIncluir" Grid.Row="1"/>
+    </Grid>
+</UserControl>

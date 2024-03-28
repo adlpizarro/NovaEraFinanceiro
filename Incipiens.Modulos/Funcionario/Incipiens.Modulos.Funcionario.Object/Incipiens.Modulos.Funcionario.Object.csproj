@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>Incipiens</Authors>
+    <Version>2.0.0</Version>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <Product />
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Incipiens.Modulos.Pessoa.Object" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>
